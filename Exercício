@@ -1,34 +1,59 @@
-pilha = []
+class Pilha:
+    def __init__(self):
+        self.top = None
+        self.size = 0
 
-def menu(): 
-    while True:
-        opcao = input('''
-    ----Menu----
-    1 - Inserir link na lista
-    2 - Remover link da lista
-    3 - Visualizar links salvos
-    0 - Fechar programa
-    Escolha: ''')
-        if opcao == '0':
-            exit()
-        elif opcao == '1':
-            a = input("Digite link: ")
-            pilha.append(a)
-            for b, word in enumerate(pilha, start=1):
-                    print(b, word)
-        elif opcao == '2':
-            if len(pilha) > 0:
-                pilha.pop()
-                for b, word in enumerate(pilha, start=1):
-                    print(b, word)
-            else:
-                print("Ainda não há nada na pilha")
-        elif opcao == '3':
-            if len(pilha) == 0:
-                print("Ainda não há nada na pilha")
-            else:
-                for b, word in enumerate(pilha, start=1):
-                    print(b, word)
-        else: input("Erro. Escolha o índice de alguma ação. [ENTER]")
+    def stack(self, valor):
+        no = No(valor)
+        if self.top != None:
+            no.next = self.top
+        self.top = no
+        self.size += 1
+        self.iprint()
 
-menu()
+    def unstack(self):
+        if self.top == None:
+            print("Fila Vazia!")
+        else:
+            self.top = self.top.next
+            self.size -=1
+        self.iprint()
+
+    def iprint(self):
+        if self.top == None:
+            print("Fila Vazia!")
+        else:
+            aux = self.top
+            while(aux):
+                print (aux.dado)
+                aux = aux.next
+            print("-------------Tamanho: ", self.size)
+
+class No:
+    def __init__(self, valor):
+        self.dado = valor
+        self.next = None
+
+exe = Pilha()
+exe.iprint()
+exe.unstack()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
